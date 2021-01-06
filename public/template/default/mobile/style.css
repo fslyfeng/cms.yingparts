@@ -6,10 +6,10 @@
     Version: 1.0
 
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     1. Theme Default CSS (body, link color, section etc)
     2. Header CSS
         2.1 Header Top
@@ -75,7 +75,7 @@ textarea {box-shadow: 0; outline: 0}
 img {
     max-width:100%;
     height:auto;
-    border:0; 
+    border:0;
     vertical-align:top;
 }
 .fix {overflow:hidden}
@@ -458,7 +458,7 @@ body {
     filter: alpha(opacity=100);
     -webkit-transform: scaleY(1);
             transform: scaleY(1);
-    z-index: 9999;   
+    z-index: 9999;
 }
 .account-dropdown a {
     color: #2d3e50;
@@ -495,8 +495,8 @@ body {
 /*----------------------------------------*/
 .mainmenu {display: inline-block; position: relative; z-index: 99}
 .mainmenu-area {
-    margin-top: 10px; 
-    -webkit-transition: all 0.3s ease 0s; 
+    margin-top: 10px;
+    -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
 .header-logo-menu.stick .mainmenu-area .mainmenu ul#nav > li > a {line-height: 96px}
@@ -1322,7 +1322,7 @@ body {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"
 }
 .slick-next:before {
-    right: 0; 
+    right: 0;
     content: "";
 }
 .slick-slider {z-index: 9;}
@@ -2465,7 +2465,7 @@ span.c-text {display: inline-block;}
 .fixed-bg-2 {background: url("img/slider/2.jpg") no-repeat fixed top center / cover }
 .backgrount-area {position: relative}
 .hover-white.button-default:hover {background: #fff; color: #2E3F51 }
-.angle .mailchimp-alerts {padding-left: 150px} 
+.angle .mailchimp-alerts {padding-left: 150px}
 .text-small {font-size: 13px;}
 .text-area p {line-height: 30px;}
 .footer-three {background: #2D3E50 none repeat scroll 0 0;}
