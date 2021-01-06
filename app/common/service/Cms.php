@@ -1,28 +1,12 @@
 <?php
+
 /**
  * +----------------------------------------------------------------------
  * | CMS前台相关业务处理
  * +----------------------------------------------------------------------
- *                      .::::.
- *                    .::::::::.            | AUTHOR: siyu
- *                    :::::::::::           | DATETIME: 2020/03/19
- *                 ..:::::::::::'
- *             '::::::::::::'
- *                .::::::::::
- *           '::::::::::::::..
- *                ..::::::::::::.
- *              ``::::::::::::::::
- *               ::::``:::::::::'        .:::.
- *              ::::'   ':::::'       .::::::::.
- *            .::::'      ::::     .:::::::'::::.
- *           .:::'       :::::  .:::::::::' ':::::.
- *          .::'        :::::.:::::::::'      ':::::.
- *         .::'         ::::::::::::::'         ``::::.
- *     ...:::           ::::::::::::'              ``::.
- *   ```` ':.          ':::::::::'                  ::::..
- *                      '.:::::'                    ':'````..
- * +----------------------------------------------------------------------
+ *  DATETIME: 2020/03/19
  */
+
 namespace app\common\service;
 
 use app\common\facade\MakeBuilder;
@@ -110,8 +94,7 @@ class Cms
      */
     public function getInfoView($info, $cate, string $tableName)
     {
-        return $info['template'] ? str_replace('.html', '', $info['template']) :
-            ($cate['template_show'] ? str_replace('.html', '', $cate['template_show']) : $tableName . '_show');
+        return $info['template'] ? str_replace('.html', '', $info['template']) : ($cate['template_show'] ? str_replace('.html', '', $cate['template_show']) : $tableName . '_show');
     }
 
     /**
@@ -225,7 +208,6 @@ class Cms
             } elseif ($field['type'] == 'number') {
             } elseif ($field['type'] == 'hidden') {
             } elseif ($field['type'] == 'date' || $field['type'] == 'time' || $field['type'] == 'datetime') {
-
             } elseif ($field['type'] == 'daterange') {
             } elseif ($field['type'] == 'tag') {
                 if (!empty($info[$field['field']])) {
@@ -241,9 +223,7 @@ class Cms
             } elseif ($field['type'] == 'images' || $field['type'] == 'files') {
                 $info[$field['field']] = json_decode($info[$field['field']], true);
             } elseif ($field['type'] == 'editor') {
-
             } elseif ($field['type'] == 'color') {
-
             }
             // Button
         }

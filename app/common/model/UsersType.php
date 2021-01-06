@@ -2,27 +2,9 @@
 /**
  * +----------------------------------------------------------------------
  * | 会员分组模型
- * +----------------------------------------------------------------------
- *                      .::::.
- *                    .::::::::.            | AUTHOR: siyu
- *                    :::::::::::           | EMAIL: 407593529@qq.com
- *                 ..:::::::::::'           | DATETIME: 2020/07/10
- *             '::::::::::::'
- *                .::::::::::
- *           '::::::::::::::..
- *                ..::::::::::::.
- *              ``::::::::::::::::
- *               ::::``:::::::::'        .:::.
- *              ::::'   ':::::'       .::::::::.
- *            .::::'      ::::     .:::::::'::::.
- *           .:::'       :::::  .:::::::::' ':::::.
- *          .::'        :::::.:::::::::'      ':::::.
- *         .::'         ::::::::::::::'         ``::::.
- *     ...:::           ::::::::::::'              ``::.
- *   ```` ':.          ':::::::::'                  ::::..
- *                      '.:::::'                    ':'````..
- * +----------------------------------------------------------------------
- */
+* +----------------------------------------------------------------------
+*DATETIME: 2020/07/10
+*/
 namespace app\common\model;
 
 // 引入框架内置类
@@ -37,8 +19,8 @@ class UsersType extends Base
     protected $createTime = 'create_time';
     protected $updateTime = 'update_time';
 
-    
-    
+
+
 
     // 获取列表
     public static function getList($where = array(), $pageSize, $order = ['sort', 'id' => 'desc'])
@@ -50,7 +32,7 @@ class UsersType extends Base
                 'list_rows' => $pageSize,
             ]);
         foreach ($list as $k => $v) {
-            
+
         }
         return MakeBuilder::changeTableData($list, 'UsersType');
     }
@@ -62,7 +44,7 @@ class UsersType extends Base
             ->order($order)
             ->select();
         foreach ($list as $k => $v) {
-            
+
         }
         return MakeBuilder::changeTableData($list, 'UsersType');
     }

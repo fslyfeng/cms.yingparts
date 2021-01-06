@@ -2,27 +2,9 @@
 /**
  * +----------------------------------------------------------------------
  * | 生成代码、处理表和字段相关数据
- * +----------------------------------------------------------------------
- *                      .::::.
- *                    .::::::::.            | AUTHOR: siyu
- *                    :::::::::::           | EMAIL: 407593529@qq.com
- *                 ..:::::::::::'           | QQ: 407593529
- *             '::::::::::::'               | DATETIME: 2019/10/12
- *                .::::::::::
- *           '::::::::::::::..
- *                ..::::::::::::.
- *              ``::::::::::::::::
- *               ::::``:::::::::'        .:::.
- *              ::::'   ':::::'       .::::::::.
- *            .::::'      ::::     .:::::::'::::.
- *           .:::'       :::::  .:::::::::' ':::::.
- *          .::'        :::::.:::::::::'      ':::::.
- *         .::'         ::::::::::::::'         ``::::.
- *     ...:::           ::::::::::::'              ``::.
- *   ```` ':.          ':::::::::'                  ::::..
- *                      '.:::::'                    ':'````..
- * +----------------------------------------------------------------------
- */
+* +----------------------------------------------------------------------
+*DATETIME: 2019/10/12
+*/
 namespace app\common\builder;
 
 use app\common\model\Field;
@@ -890,8 +872,8 @@ class MakeBuilder
         $module = \app\common\model\Module::where('table_name', $tableName)->find();
         // 替换
         $content = str_replace('{$comment}'   , $module->table_comment , $content);
-        $content = str_replace('{$author}'    , 'siyu'                 , $content);
-        $content = str_replace('{$email}'     , '407593529@qq.com'     , $content);
+        $content = str_replace('{$author}'    , 'netren'                 , $content);
+        $content = str_replace('{$email}'     , 'netren@qq.com'     , $content);
         $content = str_replace('{$dateTime}'  , date("Y/m/d")          , $content);
         $content = str_replace('{$tableName}' , $module->table_name    , $content);
         $content = str_replace('{$modelName}' , $module->model_name    , $content);
