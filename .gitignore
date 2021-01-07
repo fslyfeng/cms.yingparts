@@ -1,8 +1,13 @@
-/.idea
-/.vscode
+.idea
 *.log
 
 .env
 
 .history
 .vscode
+
+vendor
+
+runtime
+
+public/uploads
