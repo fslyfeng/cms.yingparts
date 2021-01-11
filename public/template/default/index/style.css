@@ -899,7 +899,7 @@ body {
   width: 21px;
 }
 .mainmenu ul#nav > li.current > a {
-  color: #86bc42;
+  color: #3498db;
 }
 .mainmenu ul#nav.menu-white > li > a {
   color: #fff;
@@ -1115,7 +1115,7 @@ body {
 }
 .search-form {
   background-color: #ffffff;
-  border-top: 1px solid #86bc42;
+  border-top: 1px solid #3498db;
   float: right;
   width: 290px;
 }
@@ -1579,7 +1579,7 @@ body {
 }
 .single-item {
   background: #f6f6f6 none repeat scroll 0 0;
-  border-bottom: 3px solid #86bc42;
+  border-bottom: 3px solid #3498db;
   padding: 0 35px;
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
@@ -1739,7 +1739,7 @@ body {
 }
 .single-latest-text {
   background: #f6f6f6 none repeat scroll 0 0;
-  border-bottom: 2px solid #86bc42;
+  border-bottom: 2px solid #3498db;
   overflow: hidden;
   padding: 30px 0 35px 35px;
 }
@@ -1779,7 +1779,7 @@ body {
 }
 .single-product-text {
   background: #f6f6f6 none repeat scroll 0 0;
-  border-bottom: 3px solid #86bc42;
+  border-bottom: 3px solid #3498db;
   padding: 23px 24px 22px;
 }
 .single-product-text h5 {
@@ -1993,7 +1993,7 @@ body {
 }
 .single-event-text {
   background: #f6f6f6 none repeat scroll 0 0;
-  border-bottom: 2px solid #86bc42;
+  border-bottom: 2px solid #3498db;
   padding: 29px 34px 35px;
 }
 .single-event-item .single-item-comment-view {
@@ -2055,7 +2055,7 @@ body {
   border: 0;
 }
 .subscribe-form > button {
-  border: 2px solid #86bc42;
+  border: 2px solid #3498db;
   font-family: raleway;
   font-weight: 700;
   height: 100%;
@@ -2068,7 +2068,7 @@ body {
 }
 .subscribe-form > button:hover {
   background: #fff;
-  border: 2px solid #86bc42;
+  border: 2px solid #3498db;
 }
 .newsletter-form {
   overflow: hidden;
@@ -2384,7 +2384,7 @@ body {
 }
 .pagination-content.number .pagination li a,
 .pagination-content.number .pagination li span {
-  border: 1px solid #86bc42;
+  border: 1px solid #3498db;
   display: inline-block;
   font-family: raleway;
   font-size: 14px;
@@ -2397,7 +2397,7 @@ body {
 }
 
 .pagination-content.number .pagination li.active span {
-  background-color: #86bc42;
+  background-color: #3498db;
 }
 .pagination-content.number .pagination li a i {
   font-size: 20px;
@@ -2624,7 +2624,7 @@ body {
 }
 .single-teacher-text {
   background: #f6f6f6 none repeat scroll 0 0;
-  border-bottom: 3px solid #86bc42;
+  border-bottom: 3px solid #3498db;
   padding: 20px 26px 30px;
   text-align: center;
 }
@@ -2688,7 +2688,7 @@ body {
 }
 .single-course-details {
   background: #f6f6f6 none repeat scroll 0 0;
-  border-bottom: 3px solid #86bc42;
+  border-bottom: 3px solid #3498db;
   margin-bottom: 80px;
   padding: 33px 0;
 }
@@ -2741,7 +2741,7 @@ body {
   color: #4c4c4c;
 }
 .course-duration .text {
-  border-bottom: 1px solid #86bc42;
+  border-bottom: 1px solid #3498db;
   display: block;
   padding: 15px 0;
 }
@@ -2848,7 +2848,7 @@ span.comment-time {
   text-align: center;
 }
 .tutor-image > img {
-  border: 2px solid #86bc42;
+  border: 2px solid #3498db;
   border-radius: 50%;
 }
 .sidebar-widget .single-teacher-text > h3 {
@@ -2907,7 +2907,7 @@ span.comment-time {
   background: #f6f6f6 none repeat scroll 0 0;
   margin-top: 52px;
   padding: 0 26px;
-  border-bottom: 2px solid #86bc42;
+  border-bottom: 2px solid #3498db;
 }
 .single-sidebar-widget .single-item-image img {
   margin: 0;
@@ -3084,7 +3084,7 @@ span.comment-time {
 /*----------------------------------------*/
 .event-details-content .single-event-item {
   background: #f6f6f6 none repeat scroll 0 0;
-  border-bottom: 2px solid #86bc42;
+  border-bottom: 2px solid #3498db;
   padding: 0 35px;
 }
 .single-event-image img {
@@ -3108,7 +3108,7 @@ span.comment-time {
 /*  20.2 Event Details Sidebar
 /*----------------------------------------*/
 .recent-content-item > a {
-  border: 1px solid #86bc42;
+  border: 1px solid #3498db;
   display: inline-block;
   float: left;
 }
@@ -3179,7 +3179,7 @@ span.comment-time {
 }
 .quote-section {
   background: #efefef none repeat scroll 0 0;
-  border-left: 2px solid #86bc42;
+  border-left: 2px solid #3498db;
   margin: 38px 0 39px 35px;
   overflow: hidden;
   padding: 17px 37px 1px 27px;
@@ -3389,7 +3389,7 @@ span.c-text {
 }
 .shortcode-area i {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: 2px solid #86bc42;
+  border: 2px solid #3498db;
   border-radius: 50%;
   font-size: 25px;
   height: 60px;
@@ -3431,7 +3431,7 @@ span.c-text {
   text-transform: capitalize;
 }
 .shortcode-area h3 {
-  border: 1px dashed #86bc42;
+  border: 1px dashed #3498db;
   float: left;
   font-size: 32px;
   margin: 20px 0;
@@ -3487,7 +3487,7 @@ span.c-text {
   background: #2e3f51;
 }
 .border-green {
-  border-top: 3px solid #86bc42;
+  border-top: 3px solid #3498db;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 .border-blue {
@@ -3787,7 +3787,7 @@ span.c-text {
   color: #2d3e50;
 }
 .little-nav ul li a.active {
-  color: #86bc42;
+  color: #3498db;
 }
 .line_three {
   display: -webkit-box;
