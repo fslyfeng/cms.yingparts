@@ -7,6 +7,8 @@
  */
 
 namespace app\admin\controller;
+//加载多语言
+use think\facade\Lang;
 
 class Sql extends SqlApiBase
 {
@@ -21,13 +23,13 @@ class Sql extends SqlApiBase
     if ($data->isEmpty()) {
       return $this->create(
         [],
-        'No Content',
+        Lang::get('code.No Content'),
         204
       );
     } else {
       return $this->create(
         $data,
-        'OK',
+        Lang::get('code.OK'),
         200
       );
     }

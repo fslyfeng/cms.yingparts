@@ -82,7 +82,6 @@ class ComposerStaticInit634a937ba1eabb0ab3e4c5f805e985ac
         '0d273777b2b0d96e49fb3d800c6b0e81' => __DIR__ . '/..' . '/lcobucci/jwt/compat/json-exception-polyfill.php',
         'd6b246ac924292702635bb2349f4a64b' => __DIR__ . '/..' . '/lcobucci/jwt/compat/lcobucci-clock-polyfill.php',
         '1cfd2761b63b0a29ed23657ea394cb2d' => __DIR__ . '/..' . '/topthink/think-captcha/src/helper.php',
-        '39594db8502267d6df2fe2dca5f3914d' => __DIR__ . '/..' . '/zzstudio/think-addons/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -186,7 +185,6 @@ class ComposerStaticInit634a937ba1eabb0ab3e4c5f805e985ac
             1 => __DIR__ . '/..' . '/topthink/think-helper/src',
             2 => __DIR__ . '/..' . '/topthink/think-orm/src',
             3 => __DIR__ . '/..' . '/topthink/think-template/src',
-            4 => __DIR__ . '/..' . '/zzstudio/think-addons/src',
         ),
         'clagiordano\\weblibs\\configmanager\\' => 
         array (
