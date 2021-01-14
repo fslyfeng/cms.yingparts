@@ -297,7 +297,7 @@ function tree_cate($cate, $leftHtml = '|— ', $pid = 0, $lvl = 0)
             $v['left_html'] = str_repeat($leftHtml, $lvl);
             $v['l_cate_name'] = $v['left_html'] . $v['cate_name'];
             $arr[] = $v;
-            $arr = array_merge($arr, tree_cate($cate, $leftHtml, $v['id'], $lvl + 1));
+            $arr = array_merge($arr, tree_cate($cate, $leftHtml, $v['lb_id'], $lvl + 1));
         }
     }
     return $arr;
@@ -315,7 +315,7 @@ function unlimitedForLayer($cate, $name = 'sub', $pid = 0)
     $arr = array();
     foreach ($cate as $v) {
         if ($v['parent_id'] == $pid) {
-            $v[$name] = unlimitedForLayer($cate, $name, $v['id']);
+            $v[$name] = unlimitedForLayer($cate, $name, $v['lb_id']);
             $v['url'] = getUrl($v);
             $arr[] = $v;
         }
@@ -334,7 +334,7 @@ function getChildsOn($cate, $pid)
     $arr = array();
     foreach ($cate as $v) {
         if ($v['parent_id'] == $pid) {
-            $v['sub'] = getChilds($cate, $v['id']);
+            $v['sub'] = getChilds($cate, $v['lb_id']);
             $v['url'] = getUrl($v);
             $arr[] = $v;
         }
@@ -355,7 +355,7 @@ function getChilds($cate, $pid)
         if ($v['parent_id'] == $pid) {
             $v['url'] = getUrl($v);
             $arr[] = $v;
-            $arr = array_merge($arr, getChilds($cate, $v['id']));
+            $arr = array_merge($arr, getChilds($cate, $v['lb_id']));
         }
     }
     return $arr;
@@ -401,14 +401,14 @@ function getChildsIdStr($ids, $pid = '')
 /**
  * 传递一个子分类ID返回所有的父级分类[前台栏目]
  * @param $cate
- * @param $id
+ * @param $lb_id
  * @return array
  */
-function getParents($cate, $id)
+function getParents($cate, $lb_id)
 {
     $arr = array();
     foreach ($cate as $v) {
-        if ($v['id'] == $id) {
+        if ($v['lb_id'] == $lb_id) {
             $arr[] = $v;
             $arr = array_merge(getParents($cate, $v['parent_id']), $arr);
         }
@@ -421,19 +421,19 @@ function getParents($cate, $id)
  * @param $id
  * @return string
  */
-function getTopId($id)
+function getTopId($lb_id)
 {
-    $cate = \app\common\model\Cate::field('id,parent_id')->select()->toArray();
+    $cate = \app\common\model\Cate::field('lb_id,parent_id')->select()->toArray();
     $cateArr = [];
     if ($cate) {
         foreach ($cate as $k => $v) {
-            $cateArr[$v['id']] = $v['parent_id'] ?: "0";
+            $cateArr[$v['lb_id']] = $v['parent_id'] ?: "0";
         }
     }
-    while ($cateArr[$id]) {
-        $id = $cateArr[$id];
+    while ($cateArr[$lb_id]) {
+        $lb_id = $cateArr[$lb_id];
     }
-    return $id;
+    return $lb_id;
 }
 
 /**
