@@ -46,10 +46,12 @@ class sync extends SqlApiBase
             'lb_id' => $sql_data[$i]['id'],
             'category_name' => $sql_data[$i]['name'],
             'parent_id' => $sql_data[$i]['parentid'],
+            'status' => 1,
+            'cate_id' => 8,
             'create_time' => time()
           ];
           Db::name('category')->insert($new_local_data);
-          echo '数据不存在，已写入新的数据！！';
+          echo '第' . $i . '条数据不存在，已写入新的数据！！';
         } else {
           //查询本地已存在则查询数据是否一致
           if (
@@ -57,7 +59,7 @@ class sync extends SqlApiBase
             and $local_data['category_name'] == $sql_data[$i]['name']
             and $local_data['parent_id'] == $sql_data[$i]['parentid']
           ) {
-            echo '数据存在，没有同步';
+            echo '第' . $i . '条数据存在，没有同步';
           } else {
             Db::name('category')
               ->save([
@@ -65,9 +67,10 @@ class sync extends SqlApiBase
                 'category_name' => $sql_data[$i]['name'],
                 'parent_id' => $sql_data[$i]['parentid'],
                 'update_time' => time(),
+                'cate_id' => 8,
                 'id' => $local_data['id']
               ]);
-            echo '数据不相同，已写入新的数据！';
+            echo '第' . $i . '条数据不相同，已写入新的数据！';
           }
         }
         echo '<br>';
