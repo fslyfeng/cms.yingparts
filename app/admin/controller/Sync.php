@@ -2,36 +2,106 @@
 
 /**
  * +----------------------------------------------------------------------
- * | Sql产品导入Mysql中
+ * | sql产品导入Mysql中
  * +----------------------------------------------------------------------
  */
 
 namespace app\admin\controller;
+
+use \think\facade\Db;
 //加载多语言
 use think\facade\Lang;
 
 class sync extends SqlApiBase
 {
-  public function index($page = 1, $table_name = 'lb')
+  public function index($page = 1)
   {
-    //获取Sql数据列表
-    $Sql_data = \think\facade\Db::connect('read_sql')->table($table_name)->paginate([
+    //获取远程sql产品分类数据列表
+    $sql_data = Db::connect('read_sql')->table('lb')->paginate([
       'list_rows' => $this->pageSize,
       'page' => $page,
-    ]);;
-    // 判断是否有数据
-    if ($Sql_data->isEmpty()) {
+    ]);
+    if ($sql_data->isEmpty()) {
+      //没有数据输出
       return $this->create(
         [],
         Lang::get('code.No Content'),
         204
       );
     } else {
-      return $this->create(
-        $Sql_data,
-        Lang::get('code.OK'),
-        200
-      );
+      // return $this->create(
+      //   $sql_data,
+      //   Lang::get('code.OK'),
+      //   200
+      // );
+      $i = 0;
+      while ($i < count($sql_data)) {
+        //获取本地相同id数据列表
+        $local_data = Db::name('category')
+          ->where('lb_id', $sql_data[$i]['id'])
+          ->find();
+        if (empty($local_data)) {
+          //查询本地要是没有则写入一条新数据
+          $new_local_data = [
+            'lb_id' => $sql_data[$i]['id'],
+            'category_name' => $sql_data[$i]['name'],
+            'parent_id' => $sql_data[$i]['parentid'],
+            'create_time' => time()
+          ];
+          Db::name('category')->insert($new_local_data);
+          echo '数据不存在，已写入新的数据！！';
+        } else {
+          //查询本地已存在则查询数据是否一致
+          if (
+            $local_data['lb_id'] == $sql_data[$i]['id']
+            and $local_data['category_name'] == $sql_data[$i]['name']
+            and $local_data['parent_id'] == $sql_data[$i]['parentid']
+          ) {
+            echo '数据存在，没有同步';
+          } else {
+            Db::name('category')
+              ->save([
+                'lb_id' => $sql_data[$i]['id'],
+                'category_name' => $sql_data[$i]['name'],
+                'parent_id' => $sql_data[$i]['parentid'],
+                'update_time' => time(),
+                'id' => $local_data['id']
+              ]);
+            echo '数据不相同，已写入新的数据！';
+          }
+        }
+        echo '<br>';
+        $i++;
+      }
     }
   }
+
+
+  //获取远程sql产品分类数据列表
+  // $sql_data = \think\facade\Db::connect('read_sql')->table('lb')->paginate([
+  //   'list_rows' => $this->pageSize,
+  //   'page' => $page,
+  // ]);;
+  // // 判断是否有数据
+
+  //获取本地产品数据列表
+  // $data = \think\facade\Db::table('tp_category')->paginate([
+  //   'list_rows' => $this->pageSize,
+  //   'page' => $page,
+  // ]);;
+  // // 判断是否有数据
+  // if ($data->isEmpty()) {
+  //   return $this->create(
+  //     [],
+  //     Lang::get('code.No Content'),
+  //     204
+  //   );
+  // } else {
+  //   return $this->create(
+  //     $data,
+  //     Lang::get('code.OK'),
+  //     200
+  //   );
+  // }
+
 }

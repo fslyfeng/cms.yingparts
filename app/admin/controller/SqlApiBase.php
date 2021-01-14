@@ -7,7 +7,9 @@ use think\facade\Lang;
 use think\facade\Request;
 use think\Response;
 
+
 abstract class SqlApiBase
+// class SqlApiBase extends Model
 {
   protected $pageSize;
   public function __construct()
