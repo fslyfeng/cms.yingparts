@@ -54,9 +54,9 @@ class sync extends SqlApiBase
         } else {
           //查询本地已存在则查询数据是否一致
           if (
-            $local_data['lb_id'] == $sql_data[$i]['id']
-            and $local_data['cate_name'] == $sql_data[$i]['name']
-            and $local_data['parent_id'] == $sql_data[$i]['parentid']
+            $local_data['cate_name'] == $sql_data[$i]['name']
+            // and $local_data['lb_id'] == $sql_data[$i]['id']
+            // and $local_data['parent_id'] == $sql_data[$i]['parentid']
           ) {
             echo '第' . $i . '条数据存在，没有同步';
           } else {
