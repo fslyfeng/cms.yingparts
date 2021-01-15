@@ -26,7 +26,8 @@ class Cms
         $cate = Cate::where('id', '=', $cateId)->find();
         // 设置顶级栏目，当顶级栏目不存在的时候顶级栏目为本身
         if ($cate) {
-            $cate->topid = getTopId($cateId);
+            // $cate->topid = getTopId($cateId);
+            $cate->topid = $cateId;//改为显示子分类项
             $cate->top_id = $cate->topid;
         }
         return $cate;
