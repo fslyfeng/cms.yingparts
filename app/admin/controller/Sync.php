@@ -37,37 +37,35 @@ class sync extends SqlApiBase
       $i = 0;
       while ($i < count($sql_data)) {
         //获取本地相同id数据列表
-        $local_data = Db::name('category')
+        $local_data = Db::name('cate')
           ->where('lb_id', $sql_data[$i]['id'])
           ->find();
         if (empty($local_data)) {
           //查询本地要是没有则写入一条新数据
           $new_local_data = [
             'lb_id' => $sql_data[$i]['id'],
-            'category_name' => $sql_data[$i]['name'],
+            'cate_name' => $sql_data[$i]['name'],
             'parent_id' => $sql_data[$i]['parentid'],
             'status' => 1,
-            'cate_id' => 8,
             'create_time' => time()
           ];
-          Db::name('category')->insert($new_local_data);
+          Db::name('cate')->insert($new_local_data);
           echo '第' . $i . '条数据不存在，已写入新的数据！！';
         } else {
           //查询本地已存在则查询数据是否一致
           if (
             $local_data['lb_id'] == $sql_data[$i]['id']
-            and $local_data['category_name'] == $sql_data[$i]['name']
+            and $local_data['cate_name'] == $sql_data[$i]['name']
             and $local_data['parent_id'] == $sql_data[$i]['parentid']
           ) {
             echo '第' . $i . '条数据存在，没有同步';
           } else {
-            Db::name('category')
+            Db::name('cate')
               ->save([
                 'lb_id' => $sql_data[$i]['id'],
-                'category_name' => $sql_data[$i]['name'],
+                'cate_name' => $sql_data[$i]['name'],
                 'parent_id' => $sql_data[$i]['parentid'],
                 'update_time' => time(),
-                'cate_id' => 8,
                 'id' => $local_data['id']
               ]);
             echo '第' . $i . '条数据不相同，已写入新的数据！';
@@ -78,33 +76,4 @@ class sync extends SqlApiBase
       }
     }
   }
-
-
-  //获取远程sql产品分类数据列表
-  // $sql_data = \think\facade\Db::connect('read_sql')->table('lb')->paginate([
-  //   'list_rows' => $this->pageSize,
-  //   'page' => $page,
-  // ]);;
-  // // 判断是否有数据
-
-  //获取本地产品数据列表
-  // $data = \think\facade\Db::table('tp_category')->paginate([
-  //   'list_rows' => $this->pageSize,
-  //   'page' => $page,
-  // ]);;
-  // // 判断是否有数据
-  // if ($data->isEmpty()) {
-  //   return $this->create(
-  //     [],
-  //     Lang::get('code.No Content'),
-  //     204
-  //   );
-  // } else {
-  //   return $this->create(
-  //     $data,
-  //     Lang::get('code.OK'),
-  //     200
-  //   );
-  // }
-
 }
