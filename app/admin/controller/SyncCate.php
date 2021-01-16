@@ -12,7 +12,7 @@ use \think\facade\Db;
 //加载多语言
 use think\facade\Lang;
 
-class sync extends SqlApiBase
+class syncCate extends SqlApiBase
 {
   public function index($page = 1)
   {
