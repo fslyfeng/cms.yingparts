@@ -14,13 +14,10 @@ use think\facade\Lang;
 
 class syncCate extends SqlApiBase
 {
-  public function index($page = 1)
+  public function index()
   {
     //获取远程sql产品分类数据列表
-    $sql_data = Db::connect('read_sql')->table('lb')->paginate([
-      'list_rows' => $this->pageSize,
-      'page' => $page,
-    ]);
+    $sql_data = Db::connect('read_sql')->table('lb')->select();
     if ($sql_data->isEmpty()) {
       //没有数据输出
       return $this->create(
@@ -64,7 +61,7 @@ class syncCate extends SqlApiBase
             ];
           }
           Db::name('cate')->insert($new_local_data);
-          echo '第' . $i . '条数据不存在，已写入新的数据！！';
+          echo '第' . $i . '条分类栏目数据不存在，已写入新的数据！！';
         } else {
           //查询本地已存在则查询数据是否一致
           if (
@@ -72,7 +69,7 @@ class syncCate extends SqlApiBase
             // and $local_data['id'] == $sql_data[$i]['id'] //对比原id
             // and $local_data['parent_id'] == $sql_data[$i]['parentid'] //对比原父id
           ) {
-            echo '第' . $i . '条数据存在，没有同步';
+            echo '第' . $i . '条分类栏目数据存在，没有同步';
           } else {
             Db::name('cate')
               ->save([
@@ -85,7 +82,7 @@ class syncCate extends SqlApiBase
                 'status' => 1, //状态
                 'id' => $local_data['id']
               ]);
-            echo '第' . $i . '条数据不相同，已写入新的数据！';
+            echo '第' . $i . '条分类栏目数据不相同，已写入新的数据！';
           }
         }
         echo '<br>';
