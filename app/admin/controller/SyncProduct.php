@@ -49,6 +49,7 @@ class SyncProduct extends SqlApiBase
               'title' => $sql_data[$i]['spmc'], //名称
               'author' => '管理员',
               'source' => '本站',
+              'image' => '/uploads/images/no_image.png', //设置pic
               'status' => 1, //状态
               'create_time' => time() //时间
             ];
