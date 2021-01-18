@@ -42,6 +42,9 @@ class SyncProduct extends SqlApiBase
           ->find();
         //查询库存
         $price = Db::connect('read_sql')->table('kc')->where('spid', $sql_data[$i]['id'])->find();
+        //查询状态
+        $sql_data[$i]['jy'] == 0 ? $status = 1 : $status = 0;
+        //插入数据
         if (empty($local_data)) {
           //查询本地要是没有则写入一条新数据
           if ($sql_data[$i]['id'] != "00000000") {
@@ -58,7 +61,7 @@ class SyncProduct extends SqlApiBase
               'image' => '/uploads/images/no_image.png', //设置pic
               'author' => '管理员',
               'source' => '本站',
-              'status' => 1, //状态
+              'status' => $status, //状态
               'create_time' => time() //时间
             ];
             Db::name('product')->insert($new_local_data);
@@ -70,7 +73,7 @@ class SyncProduct extends SqlApiBase
           if (
             $local_data['title'] == $sql_data[$i]['spmc'] //对比名称
             and $local_data['id'] == $sql_data[$i]['id'] //对比原id
-            //       // and $local_data['parent_id'] == $sql_data[$i]['parentid'] //对比原父id
+            and $local_data['status'] == $status //对比原父id
           ) {
             echo '第' . $i . '条数据存在，没有同步';
           } else {
@@ -88,7 +91,7 @@ class SyncProduct extends SqlApiBase
                 'stock' => $price['sl'], //库存
                 'author' => '管理员',
                 'source' => '本站',
-                'status' => 1, //状态
+                'status' => $status, //状态
                 'update_time' => time()
               ]);
             echo '第' . $i . '条数据不相同，已写入新的数据！';
