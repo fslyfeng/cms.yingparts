@@ -29,68 +29,59 @@ class SyncProduct extends SqlApiBase
         204
       );
     } else {
-      return $this->create(
-        $sql_data,
-        Lang::get('code.OK'),
-        200
-      );
-      // $i = 0;
-      // while ($i < count($sql_data)) {
-      //   //获取本地相同id数据列表
-      //   $local_data = Db::name('cate')
-      //     ->where('id', $sql_data[$i]['id'])
-      //     ->find();
-      //   if (empty($local_data)) {
-      //     //查询本地要是没有则写入一条新数据
-      //     if ($sql_data[$i]['parentid'] == 0) {
-      //       $new_local_data = [
-      //         'id' => $sql_data[$i]['id'], //原类id
-      //         'cate_name' => $sql_data[$i]['name'], //名称
-      //         'en_name' => $sql_data[$i]['name'], //名称
-      //         'parent_id' => 8, //父id
-      //         'module_id' => 22, //所属模组
-      //         'status' => 1, //状态
-      //         'create_time' => time() //时间
-      //       ];
-      //     } else {
-      //       $new_local_data = [
-      //         'id' => $sql_data[$i]['id'], //原类id
-      //         'cate_name' => $sql_data[$i]['name'], //名称
-      //         'en_name' => $sql_data[$i]['name'], //名称
-      //         'parent_id' => $sql_data[$i]['parentid'], //父id
-      //         'module_id' => 22, //所属模组
-      //         'status' => 1, //状态
-      //         'create_time' => time() //时间
-      //       ];
-      //     }
-      //     Db::name('cate')->insert($new_local_data);
-      //     echo '第' . $i . '条数据不存在，已写入新的数据！！';
-      //   } else {
-      //     //查询本地已存在则查询数据是否一致
-      //     if (
-      //       $local_data['cate_name'] == $sql_data[$i]['name'] //对比名称
-      //       // and $local_data['id'] == $sql_data[$i]['id'] //对比原id
-      //       // and $local_data['parent_id'] == $sql_data[$i]['parentid'] //对比原父id
-      //     ) {
-      //       echo '第' . $i . '条数据存在，没有同步';
-      //     } else {
-      //       Db::name('cate')
-      //         ->save([
-      //           'id' => $sql_data[$i]['id'],
-      //           'cate_name' => $sql_data[$i]['name'],
-      //           'en_name' => $sql_data[$i]['name'], //名称
-      //           'parent_id' => $sql_data[$i]['parentid'],
-      //           'update_time' => time(),
-      //           'module_id' => 22, //
-      //           'status' => 1, //状态
-      //           'id' => $local_data['id']
-      //         ]);
-      //       echo '第' . $i . '条数据不相同，已写入新的数据！';
-      //     }
-      //   }
-      //   echo '<br>';
-      //   $i++;
-      // }
+      // return $this->create(
+      //   $sql_data,
+      //   Lang::get('code.OK'),
+      //   200
+      // );
+      $i = 0;
+      while ($i < count($sql_data)) {
+        //获取本地相同id数据列表
+        $local_data = Db::name('product')
+          ->where('id', $sql_data[$i]['id'])
+          ->find();
+        if (empty($local_data)) {
+          //查询本地要是没有则写入一条新数据
+          if ($sql_data[$i]['id'] != "00000000") {
+            $new_local_data = [
+              'id' => $sql_data[$i]['id'], //原id
+              'cate_id' => $sql_data[$i]['lbid'], //原分类id
+              'title' => $sql_data[$i]['spmc'], //名称
+              'author' => '管理员',
+              'source' => '本站',
+              'status' => 1, //状态
+              'create_time' => time() //时间
+            ];
+            Db::name('product')->insert($new_local_data);
+            echo '第' . $i . '条数据不存在，已写入新的数据！！';
+          }
+        } else {
+          //     //查询本地已存在则查询数据是否一致
+          if (
+            $local_data['title'] == $sql_data[$i]['spmc'] //对比名称
+            and $local_data['id'] == $sql_data[$i]['id'] //对比原id
+            //       // and $local_data['parent_id'] == $sql_data[$i]['parentid'] //对比原父id
+          ) {
+            echo '第' . $i . '条数据存在，没有同步';
+          } else {
+            //更新产品数据项
+            Db::name('product')
+              ->save([
+                'id' => $sql_data[$i]['id'], //原id
+                'cate_id' => $sql_data[$i]['lbid'], //原分类id
+                'title' => $sql_data[$i]['spmc'], //名称
+                'author' => '管理员',
+                'source' => '本站',
+                'status' => 1, //状态
+                'update_time' => time(),
+                'status' => 1, //状态
+              ]);
+            echo '第' . $i . '条数据不相同，已写入新的数据！';
+          }
+        }
+        echo '<br>';
+        $i++;
+      }
     }
   }
 }
