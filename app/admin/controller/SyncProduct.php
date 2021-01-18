@@ -14,13 +14,10 @@ use think\facade\Lang;
 
 class SyncProduct extends SqlApiBase
 {
-  public function index($page = 1)
+  public function index()
   {
     //获取远程sql产品分类数据列表
-    $sql_data = Db::connect('read_sql')->table('spxx')->paginate([
-      'list_rows' => $this->pageSize,
-      'page' => $page,
-    ]);
+    $sql_data = Db::connect('read_sql')->table('spxx')->select();
     if ($sql_data->isEmpty()) {
       //没有数据输出
       return $this->create(
@@ -41,7 +38,8 @@ class SyncProduct extends SqlApiBase
           ->where('id', $sql_data[$i]['id'])
           ->find();
         //查询库存
-        $price = Db::connect('read_sql')->table('kc')->where('spid', $sql_data[$i]['id'])->find();
+        $stock = Db::connect('read_sql')->table('kc')->where('spid', $sql_data[$i]['id'])->find();
+        $stock  ? $stock = $stock['sl'] : $stock = 0;
         //查询状态
         $sql_data[$i]['jy'] == 0 ? $status = 1 : $status = 0;
         //插入数据
@@ -57,7 +55,7 @@ class SyncProduct extends SqlApiBase
               'color' => $sql_data[$i]['ys'], //颜色
               'price' => $sql_data[$i]['sj'], //售价
               'bar_code' => $sql_data[$i]['sptm'], //条码
-              'stock' => $price['sl'], //库存
+              'stock' => $stock, //库存
               'image' => '/uploads/images/no_image.png', //设置pic
               'author' => '管理员',
               'source' => '本站',
@@ -71,9 +69,15 @@ class SyncProduct extends SqlApiBase
         } else {
           //查询本地已存在则查询数据是否一致
           if (
-            $local_data['title'] == $sql_data[$i]['spmc'] //对比名称
-            and $local_data['id'] == $sql_data[$i]['id'] //对比原id
-            and $local_data['status'] == $status //对比原父id
+            $local_data['id'] == $sql_data[$i]['id'] //对比原id
+            and $local_data['title'] == $sql_data[$i]['spmc'] //对比名称
+            and $local_data['unit'] == $sql_data[$i]['dw'] //对比单位
+            and $local_data['standard'] == $sql_data[$i]['ggxh'] //对比规格型号
+            and $local_data['color'] == $sql_data[$i]['ys']  //对比颜色
+            and $local_data['price'] == $sql_data[$i]['sj']  //对比售价
+            and $local_data['bar_code'] == $sql_data[$i]['sptm']  //对比条码
+            and $local_data['stock'] == $stock //对比库存
+            and $local_data['status'] == $status //对比状态
           ) {
             echo '第' . $i . '条数据存在，没有同步';
           } else {
@@ -88,7 +92,7 @@ class SyncProduct extends SqlApiBase
                 'color' => $sql_data[$i]['ys'], //颜色
                 'price' => $sql_data[$i]['sj'], //售价
                 'bar_code' => $sql_data[$i]['sptm'], //条码
-                'stock' => $price['sl'], //库存
+                'stock' => $stock, //库存
                 'author' => '管理员',
                 'source' => '本站',
                 'status' => $status, //状态
