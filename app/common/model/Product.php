@@ -2,8 +2,7 @@
 /**
  * +----------------------------------------------------------------------
  * | 产品模块模型
-* +----------------------------------------------------------------------
-*DATETIME: 2020/07/10
+ * +----------------------------------------------------------------------
 */
 namespace app\common\model;
 
@@ -19,7 +18,7 @@ class Product extends Base
     protected $createTime = 'create_time';
     protected $updateTime = 'update_time';
 
-
+    
     public function cate()
     {
         return $this->belongsTo('Cate', 'cate_id');

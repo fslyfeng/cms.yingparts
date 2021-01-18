@@ -2,8 +2,7 @@
 /**
  * +----------------------------------------------------------------------
  * | 产品模块控制器
-* +----------------------------------------------------------------------
-*DATETIME: 2020/07/10
+ * +----------------------------------------------------------------------
 */
 namespace app\admin\controller;
 
@@ -70,7 +69,7 @@ class Product extends Base
         $groups = MakeBuilder::getgetAddGroups($this->modelName, $this->tableName, $coloumns);
         // 构建页面
         $builder = FormBuilder::getInstance();
-
+        
         $groups ? $builder->addGroup($groups) : $builder->addFormItems($coloumns);
         return $builder->fetch();
     }
