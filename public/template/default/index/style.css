@@ -1741,7 +1741,7 @@ body {
   background: #f6f6f6 none repeat scroll 0 0;
   border-bottom: 2px solid #3498db;
   overflow: hidden;
-  padding: 30px 0 35px 35px;
+  padding: 10px 0 10px 10px;
 }
 .single-latest-item .single-item-comment-view span {
   margin-right: 13px;
