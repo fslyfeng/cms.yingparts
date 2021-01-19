@@ -1,33 +1,36 @@
 <?php
+
 /**
  * +----------------------------------------------------------------------
  * | 自定义标签
-* +----------------------------------------------------------------------
-*DATETIME: 2019/03/28
-*/
+ * +----------------------------------------------------------------------
+ *DATETIME: 2019/03/28
+ */
+
 namespace app\common\taglib;
 
 use think\template\TagLib;
 
-class Tp extends TagLib {
+class Tp extends TagLib
+{
 
     protected $tags = array(
         // 标签定义： attr 属性列表 close 是否闭合（0 或者1 默认1） alias 标签别名 level 嵌套层次
         'close'     => ['attr' => 'time,format', 'close' => 0],                              // 闭合标签，默认为不闭合
         'open'      => ['attr' => 'name,type', 'close' => 1],
         'nav'       => ['attr' => 'id,limit,name', 'close' => 1],                            // 通用导航信息
-        'cate'      => ['attr' => 'id,type,anchor','close' => 0],                            // 通用栏目信息
-        'position'  => ['attr' => 'name','close' => 1],                                      // 通用位置信息
-        'link'      => ['attr' => 'name','close' => 1],                                      // 获取友情链接
-        'ad'        => ['attr' => 'name,id','close' => 1],                                   // 获取广告信息
-        'debris'    => ['attr' => 'name,type','close' => 0],                                 // 获取碎片信息
-        'list'      => ['attr' => 'id,name,pagesize,where,search,limit,order','close' => 1], // 通用列表
-        'search'    => ['attr' => 'search,table,name,pagesize,where,order','close' => 1],    // 通用搜索
-        'tag'       => ['attr' => 'name,pagesize,order','close' => 1],                       // 通用标签
-        'tagcloud'  => ['attr' => 'name,table,limit','close' => 1],                          // 标签云
-        'prev'	    => ['attr' => 'len','close' => 0],                                       // 上一篇
-        'next'	    => ['attr' => 'len','close' => 0],                                       // 下一篇
-        'dict'      => ['attr' => 'name,dict_type,field,all','close' => 1],                  // 获取字典类型
+        'cate'      => ['attr' => 'id,type,anchor', 'close' => 0],                            // 通用栏目信息
+        'position'  => ['attr' => 'name', 'close' => 1],                                      // 通用位置信息
+        'link'      => ['attr' => 'name', 'close' => 1],                                      // 获取友情链接
+        'ad'        => ['attr' => 'name,id', 'close' => 1],                                   // 获取广告信息
+        'debris'    => ['attr' => 'name,type', 'close' => 0],                                 // 获取碎片信息
+        'list'      => ['attr' => 'id,name,pagesize,where,search,limit,order', 'close' => 1], // 通用列表
+        'search'    => ['attr' => 'search,table,name,pagesize,where,order', 'close' => 1],    // 通用搜索
+        'tag'       => ['attr' => 'name,pagesize,order', 'close' => 1],                       // 通用标签
+        'tagcloud'  => ['attr' => 'name,table,limit', 'close' => 1],                          // 标签云
+        'prev'        => ['attr' => 'len', 'close' => 0],                                       // 上一篇
+        'next'        => ['attr' => 'len', 'close' => 0],                                       // 下一篇
+        'dict'      => ['attr' => 'name,dict_type,field,all', 'close' => 1],                  // 获取字典类型
     );
 
     // 这是一个闭合标签的简单演示
@@ -176,7 +179,7 @@ class Tp extends TagLib {
         $parse  = '<?php ';
         $parse .= '
             $list       = [];
-            $__CATEID__ = '.$id.' ? '.$id.' : getCateId();
+            $__CATEID__ = ' . $id . ' ? ' . $id . ' : getCateId();
             $__CATE__   = \app\common\model\Cate::find($__CATEID__);
             $__SEARCH__ = getSearchField(\'' . $search . '\');
             // 查询子分类,列表要包含子分类内容
@@ -232,17 +235,18 @@ class Tp extends TagLib {
         $parse  = '<?php ';
         $parse .= '
                 $__MODULE__ = \app\common\model\Module::where("table_name","' . strtolower($table) . '")->find();
-                $__MODEL__ = \'\app\common\model\\\\\' . $__MODULE__->model_name;
-
-                $__LIST__ = $__MODEL__::where("' . $where . '")
-                    ->where("title", "like", "%' . $search . '%")
-                    ->order("' . $order . '")
-                    ->paginate([
-                        \'query\'     => request()->param(),
-                        \'list_rows\' => "' . $pagesize . '",
-                    ]);
-                $page = $__LIST__->render();
-
+                $__MODEL__ = \'\app\common\model\\\\\' . $__MODULE__->model_name;';
+        $parse .= 'if (is_numeric($search)) {
+            $search_item = \'id\';
+          } else {
+            $search_item = \'title\';
+          }
+          $__LIST__ = $__MODEL__::where("status = 1")->where($search_item, "like", "%$search%")->order("sort ASC,id DESC")
+            ->paginate([
+              \'query\'     => request()->param(),
+              \'list_rows\' => "12",
+            ]);';
+        $parse .= '$page = $__LIST__->render();
                 //处理数据（把列表中需要处理的字段转换成数组和对应的值）
                 $__LIST__ = changeFields($__LIST__,$__MODULE__->id);
             ';
