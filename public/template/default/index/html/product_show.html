@@ -65,10 +65,12 @@
                           >{$info.stock|round=2}</span
                         >
                         <span><i class="zmdi zmdi-ruler"></i>{$info.unit}</span>
+                        {if $Request.session.user.id}
                         <span
                           ><i class="zmdi zmdi-money"></i
                           >{$info.price*1.2}</span
                         >
+                        {/if}
                         <br />
                         <span
                           ><i class="zmdi zmdi-calendar-check"></i

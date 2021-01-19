@@ -86,9 +86,11 @@
                         >{$list.stock|round=2}</span
                       >
                       <span><i class="zmdi zmdi-ruler"></i>{$list.unit}</span>
+                      {if $Request.session.user.id}
                       <span
-                        ><i class="zmdi zmdi-money"></i>{$list.price*1.2}</span
+                        ><i class="zmdi zmdi-money"></i>{$info.price*1.2}</span
                       >
+                      {/if}
                     </div>
                     <p class="line_three">{$list.summary}</p>
                     <a href="{$list.url}" class="button-default">查看详细</a>
