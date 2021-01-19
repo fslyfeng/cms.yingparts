@@ -1780,7 +1780,10 @@ body {
 .single-product-text {
   background: #f6f6f6 none repeat scroll 0 0;
   border-bottom: 3px solid #3498db;
-  padding: 15px 5px 5px 15px;
+  padding: 15px 10px 15px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .single-product-text h5 {
   color: #696969;
