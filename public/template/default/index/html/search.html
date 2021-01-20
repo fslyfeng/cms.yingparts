@@ -88,7 +88,13 @@
                       <span><i class="zmdi zmdi-ruler"></i>{$list.unit}</span>
                       {if $Request.session.user.id}
                       <span
-                        ><i class="zmdi zmdi-money"></i>{$info.price*1.2}</span
+                        ><i class="zmdi zmdi-money"></i>{$list.price*1.2}</span
+                      >
+                      {/if} {if condition="$list.id neq $list.bar_code "}
+                      <br />
+                      <span
+                        ><i class="zmdi zmdi-view-column"></i
+                        >{$list.bar_code}</span
                       >
                       {/if}
                     </div>

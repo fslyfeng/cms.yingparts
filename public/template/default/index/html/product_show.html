@@ -70,6 +70,12 @@
                           ><i class="zmdi zmdi-money"></i
                           >{$info.price*1.2}</span
                         >
+                        {/if} {if condition="$info.id neq $info.bar_code "}
+                        <br />
+                        <span
+                          ><i class="zmdi zmdi-view-column"></i
+                          >{$info.bar_code}</span
+                        >
                         {/if}
                         <br />
                         <span
