@@ -56,10 +56,33 @@
                     {/if}
                     <div class="single-product-text">
                       <h5><a href="{$list.url}">{$list.title}</a></h5>
+
                       <div class="text-right">
                         <span
                           ><i class="zmdi zmdi-assignment"></i> {$list.id}</span
                         >
+                      </div>
+                      <div class="single-item-comment-view">
+                        <span
+                          ><i class="zmdi zmdi-grid"></i>{$list.standard}</span
+                        >
+                        <span
+                          ><i class="zmdi zmdi-invert-colors"></i
+                          >{$list.color}</span
+                        >
+                        <br />
+                        <span
+                          ><i class="zmdi zmdi-store"></i
+                          >{$list.stock|round=2}</span
+                        >
+                        <span><i class="zmdi zmdi-ruler"></i>{$list.unit}</span>
+                        {if $Request.session.user.id}
+                        <br />
+                        <span
+                          ><i class="zmdi zmdi-money"></i
+                          >{$list.price*1.2}</span
+                        >
+                        {/if}
                       </div>
                       <div class="product-buttons mt-5">
                         <a
