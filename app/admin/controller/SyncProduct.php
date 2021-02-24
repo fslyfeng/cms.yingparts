@@ -17,14 +17,14 @@ class SyncProduct extends SqlApiBase
   public function index()
   {
 
-    //查询本地已禁用父id
+    //查询本地已禁用分类父id
     $local_parent_id_status = Db::name('Cate')->where('status', 0)->column('id');
-    //查询本地已禁用子id
+    //查询本地已禁用分类子id
     $local_child_id_status = Db::name('Cate')->where('parent_id', 'in', $local_parent_id_status)->column('id');
 
     //获取远程sql产品分类数据列表
     $sql_data = Db::connect('read_sql')->table('spxx')
-      ->where('jy', 0)
+      // ->where('jy', 0)
       // ->where('lbid', 'notin', $local_parent_id_status)//不在parent_id
       // ->where('lbid', 'notin', $local_child_id_status)//不在cate_id
       ->select();
@@ -50,13 +50,17 @@ class SyncProduct extends SqlApiBase
         //查询库存
         $stock = Db::connect('read_sql')->table('kc')->where('spid', $value['id'])->find();
         $stock  ? $stock = $stock['sl'] : $stock = 0;
-        //查询远程禁用状态
+        //查询禁用状态
         $value['jy'] == 0 ? $status = 1 : $status = 0;
         //查出所类别属父id如禁用就代换为禁用
         foreach ($local_child_id_status as $v) {
           if ($value['lbid'] == $v) {
             $status = 0;
           }
+        }
+        //条码如空就成为id
+        if (empty($value['sptm'])) {
+          $value['sptm'] = $value['id'];
         }
         //插入数据
         if (empty($local_data)) {
