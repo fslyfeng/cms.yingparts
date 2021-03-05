@@ -24,6 +24,7 @@ class SyncProduct extends SqlApiBase
 
     //获取远程sql产品分类数据列表
     $sql_data = Db::connect('read_sql')->table('spxx')
+      ->where('spmc', '<>', '优惠商品')
       // ->where('jy', 0)
       // ->where('lbid', 'notin', $local_parent_id_status)//不在parent_id
       // ->where('lbid', 'notin', $local_child_id_status)//不在cate_id
